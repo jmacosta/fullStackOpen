@@ -2,31 +2,23 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import ReactDOM from "react-dom/client";
-const Header = (props) => {
-  return <h1>{props.course}</h1>;
+const Header = ({ course }) => {
+  return <h1>{course}</h1>;
 };
-const Part = (props) => {
+const Part = ({ part, exercise }) => {
   return (
     <p>
-      {props.part} {props.exercise}
+      {part} {exercise}
     </p>
   );
 };
-const Content = (props) => {
+const Content = ({ course }) => {
   return (
     <div>
-      <Part
-        part={props.content.parts[0].name}
-        exercise={props.content.parts[0].exercises}
-      />
-      <Part
-        part={props.content.parts[1].name}
-        exercise={props.content.parts[1].exercises}
-      />
-      <Part
-        part={props.content.parts[2].name}
-        exercise={props.content.parts[2].exercises}
-      />
+      {course.parts.map((element, index) => (
+        <Part key={index} part={element.name} exercise={element.exercises} />
+      ))}
+      ;
     </div>
   );
 };
@@ -53,7 +45,7 @@ const App = () => {
   return (
     <div>
       <Header course={course.name} />
-      <Content content={course} />
+      <Content course={course} />
 
       <Total
         exercise1={course.parts[0].exercises}
