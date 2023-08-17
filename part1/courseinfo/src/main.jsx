@@ -159,25 +159,54 @@ const App = () => {
 
 //complex state
 
+// const App = () => {
+//   const [clicks, setClicks] = useState({ left: 0, right: 0 });
+//   const handleLeftClick = () => {
+//     setClicks({ ...clicks, left: clicks.left + 1 });
+//   };
+//   const handleRightClick = () => {
+//     setClicks({ ...clicks, right: clicks.right + 1 });
+//   };
+
+//   return (
+//     <div>
+//       {clicks.left}
+//       <button style={{ margin: "10px" }} onClick={handleLeftClick}>
+//         Left
+//       </button>
+//       {clicks.right}
+//       <button style={{ margin: "10px" }} onClick={handleRightClick}>
+//         Right
+//       </button>
+//     </div>
+//   );
+// };
+
+// Matrix Management
 const App = () => {
-  const [clicks, setClicks] = useState({ left: 0, right: 0 });
+  const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);
+  const [allClicks, setAll] = useState([]);
   const handleLeftClick = () => {
-    setClicks({ ...clicks, left: clicks.left + 1 });
+    setLeft(left + 1);
+    setAll(allClicks.concat("L"));
   };
   const handleRightClick = () => {
-    setClicks({ ...clicks, right: clicks.right + 1 });
+    setRight(right + 1);
+    setAll(allClicks.concat("R"));
   };
 
   return (
     <div>
-      {clicks.left}
+      {left}
       <button style={{ margin: "10px" }} onClick={handleLeftClick}>
         Left
       </button>
-      {clicks.right}
+      {right}
       <button style={{ margin: "10px" }} onClick={handleRightClick}>
         Right
       </button>
+      <p>{allClicks.join(" ")}</p>
     </div>
   );
 };
