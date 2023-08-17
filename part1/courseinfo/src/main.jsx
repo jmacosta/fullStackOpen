@@ -128,31 +128,56 @@ const App = () => {
 
 // passing state to child components
 
-const Display = ({ counter }) => <div>{counter}</div>;
+// const Display = ({ counter }) => <div>{counter}</div>;
 
-const Button = ({ actionFunction, labelButton }) => (
-  <button style={{ margin: "25px", padding: "10px" }} onClick={actionFunction}>
-    {labelButton}
-  </button>
-);
+// const Button = ({ actionFunction, labelButton }) => (
+//   <button style={{ margin: "25px", padding: "10px" }} onClick={actionFunction}>
+//     {labelButton}
+//   </button>
+// );
+
+// const App = () => {
+//   const [counter, setCounter] = useState(0);
+//   const increaseByOne = () => {
+//     setCounter(counter + 1);
+//   };
+//   const setToZero = () => {
+//     setCounter(0);
+//   };
+//   const decreaseByOne = () => {
+//     setCounter(counter - 1);
+//   };
+//   return (
+//     <div>
+//       <Display counter={counter} />
+//       <Button actionFunction={increaseByOne} labelButton="Plus" />
+//       <Button actionFunction={setToZero} labelButton="Zero" />
+//       <Button actionFunction={decreaseByOne} labelButton="Minus" />
+//     </div>
+//   );
+// };
+
+//complex state
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
-  const increaseByOne = () => {
-    setCounter(counter + 1);
+  const [clicks, setClicks] = useState({ left: 0, right: 0 });
+  const handleLeftClick = () => {
+    setClicks({ ...clicks, left: clicks.left + 1 });
   };
-  const setToZero = () => {
-    setCounter(0);
+  const handleRightClick = () => {
+    setClicks({ ...clicks, right: clicks.right + 1 });
   };
-  const decreaseByOne = () => {
-    setCounter(counter - 1);
-  };
+
   return (
     <div>
-      <Display counter={counter} />
-      <Button actionFunction={increaseByOne} labelButton="Plus" />
-      <Button actionFunction={setToZero} labelButton="Zero" />
-      <Button actionFunction={decreaseByOne} labelButton="Minus" />
+      {clicks.left}
+      <button style={{ margin: "10px" }} onClick={handleLeftClick}>
+        Left
+      </button>
+      {clicks.right}
+      <button style={{ margin: "10px" }} onClick={handleRightClick}>
+        Right
+      </button>
     </div>
   );
 };
