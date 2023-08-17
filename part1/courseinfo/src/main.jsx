@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 
 const container = document.getElementById("root");
@@ -93,24 +93,14 @@ const App = () => {
 
 //                 Re-renderizado de la página
 
-const App = (props) => {
-  const { counter } = props;
+const App = () => {
+  const [counter, setCounter] = useState(345);
+  setTimeout(() => setCounter(counter + 1), 1000);
   return <div>{counter}</div>;
 };
-let counter = 1;
-
-const refresh = () => {
-  // root.unmount(<App />);
-  root.render(<App counter={counter} />);
-};
-
-setInterval(() => {
-  refresh();
-  counter += 1;
-}, 1000);
 
 root.render(
   <React.StrictMode>
-    <App counter={counter} />
+    <App />
   </React.StrictMode>
 );
