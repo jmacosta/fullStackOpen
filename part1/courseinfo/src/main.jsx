@@ -101,6 +101,41 @@ const App = () => {
 
 //Manejo de eventos
 
+// const App = () => {
+//   const [counter, setCounter] = useState(0);
+//   const increaseByOne = () => {
+//     setCounter(counter + 1);
+//   };
+//   const setToZero = () => {
+//     setCounter(0);
+//   };
+//   return (
+//     <div>
+//       <div>{counter}</div>
+
+//       <button
+//         style={{ margin: "25px", padding: "10px" }}
+//         onClick={increaseByOne}
+//       >
+//         Plus
+//       </button>
+//       <button style={{ margin: "25px", padding: "10px" }} onClick={setToZero}>
+//         Zero
+//       </button>
+//     </div>
+//   );
+// };
+
+// passing state to child components
+
+const Display = ({ counter }) => <div>{counter}</div>;
+
+const Button = ({ actionFunction, labelButton }) => (
+  <button style={{ margin: "25px", padding: "10px" }} onClick={actionFunction}>
+    {labelButton}
+  </button>
+);
+
 const App = () => {
   const [counter, setCounter] = useState(0);
   const increaseByOne = () => {
@@ -109,19 +144,15 @@ const App = () => {
   const setToZero = () => {
     setCounter(0);
   };
+  const decreaseByOne = () => {
+    setCounter(counter - 1);
+  };
   return (
     <div>
-      <div>{counter}</div>
-
-      <button
-        style={{ margin: "25px", padding: "10px" }}
-        onClick={increaseByOne}
-      >
-        Plus
-      </button>
-      <button style={{ margin: "25px", padding: "10px" }} onClick={setToZero}>
-        Zero
-      </button>
+      <Display counter={counter} />
+      <Button actionFunction={increaseByOne} labelButton="Plus" />
+      <Button actionFunction={setToZero} labelButton="Zero" />
+      <Button actionFunction={decreaseByOne} labelButton="Minus" />
     </div>
   );
 };
