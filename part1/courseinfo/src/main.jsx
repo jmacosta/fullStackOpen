@@ -93,10 +93,37 @@ const App = () => {
 
 //                 Re-renderizado de la página
 
+// const App = () => {
+//   const [counter, setCounter] = useState(345);
+//   setTimeout(() => setCounter(counter + 1), 1000);
+//   return <div>{counter}</div>;
+// };
+
+//Manejo de eventos
+
 const App = () => {
-  const [counter, setCounter] = useState(345);
-  setTimeout(() => setCounter(counter + 1), 1000);
-  return <div>{counter}</div>;
+  const [counter, setCounter] = useState(0);
+  const increaseByOne = () => {
+    setCounter(counter + 1);
+  };
+  const setToZero = () => {
+    setCounter(0);
+  };
+  return (
+    <div>
+      <div>{counter}</div>
+
+      <button
+        style={{ margin: "25px", padding: "10px" }}
+        onClick={increaseByOne}
+      >
+        Plus
+      </button>
+      <button style={{ margin: "25px", padding: "10px" }} onClick={setToZero}>
+        Zero
+      </button>
+    </div>
+  );
 };
 
 root.render(
