@@ -182,15 +182,23 @@ const App = () => {
 //   );
 // };
 
-// Matrix Management
+// conditional render
+const History = ({ allClicks }) => {
+  if (allClicks.length === 0) {
+    return <div>the app is used by pressing the buttons</div>;
+  }
+  return <div>button press history:{allClicks.join(" ")}</div>;
+};
+const Button = ({ actionFunction, labelButton }) => (
+  <button style={{ margin: "25px", padding: "10px" }} onClick={actionFunction}>
+    {labelButton}
+  </button>
+);
 const App = () => {
   const [left, setLeft] = useState(0);
   const [right, setRight] = useState(0);
   const [allClicks, setAll] = useState([]);
-  const handleLeftClick = () => {
-    setLeft(left + 1);
-    setAll(allClicks.concat("L"));
-  };
+
   const handleRightClick = () => {
     setRight(right + 1);
     setAll(allClicks.concat("R"));
@@ -199,14 +207,16 @@ const App = () => {
   return (
     <div>
       {left}
-      <button style={{ margin: "10px" }} onClick={handleLeftClick}>
-        Left
-      </button>
+      <Button
+        actionFunction={() => {
+          setLeft(left + 1);
+          setAll(allClicks.concat("L"));
+        }}
+        labelButton="Left"
+      />
+      <Button actionFunction={handleRightClick} labelButton="Right" />
       {right}
-      <button style={{ margin: "10px" }} onClick={handleRightClick}>
-        Right
-      </button>
-      <p>{allClicks.join(" ")}</p>
+      <History allClicks={allClicks} />
     </div>
   );
 };
