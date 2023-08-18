@@ -30,6 +30,22 @@ const PositivePercentage = ({ feedback }) => (
     }
   />
 );
+const Statistics = ({ feedback }) => {
+  if (feedback.good + feedback.neutral + feedback.bad === 0) {
+    return <p>No feedback given</p>;
+  }
+
+  return (
+    <div>
+      <DisplayData label="Good" dataValue={feedback.good} />
+      <DisplayData label="Neutral" dataValue={feedback.neutral} />
+      <DisplayData label="Bad" dataValue={feedback.bad} />
+      <Allvalues feedback={feedback} />
+      <Average feedback={feedback} />
+      <PositivePercentage feedback={feedback} />
+    </div>
+  );
+};
 
 function App() {
   const [feedback, setFeedback] = useState({ good: 0, neutral: 0, bad: 0 });
@@ -60,14 +76,7 @@ function App() {
       <div>
         <h1>Statistics</h1>
       </div>
-      <div>
-        <DisplayData label="Good" dataValue={feedback.good} />
-        <DisplayData label="Neutral" dataValue={feedback.neutral} />
-        <DisplayData label="Bad" dataValue={feedback.bad} />
-        <Allvalues feedback={feedback} />
-        <Average feedback={feedback} />
-        <PositivePercentage feedback={feedback} />
-      </div>
+      <Statistics feedback={feedback} />
     </>
   );
 }
