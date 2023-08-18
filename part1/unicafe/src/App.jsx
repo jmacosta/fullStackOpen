@@ -1,10 +1,14 @@
 import { useState } from "react";
 import Button from "./Button";
-import PullData from "./PullData";
+import DisplayData from "./DisplayData";
 
 function App() {
   const [feedback, setFeedback] = useState({ good: 0, neutral: 0, bad: 0 });
-
+  const allValues = feedback.good + feedback.neutral + feedback.bad;
+  const average =
+    (feedback.good * 1 + feedback.neutral * 0 + feedback.bad * -1) / allValues;
+  const positivePercentage =
+    Math.floor((feedback.good * 100) / allValues) + " %";
   return (
     <>
       <div>
@@ -30,9 +34,12 @@ function App() {
         <h1>Statistics</h1>
       </div>
       <div>
-        <PullData label="Good" counter={feedback.good} />
-        <PullData label="Neutral" counter={feedback.neutral} />
-        <PullData label="Bad" counter={feedback.bad} />
+        <DisplayData label="Good" dataValue={feedback.good} />
+        <DisplayData label="Neutral" dataValue={feedback.neutral} />
+        <DisplayData label="Bad" dataValue={feedback.bad} />
+        <DisplayData label="All" dataValue={allValues} />
+        <DisplayData label="Average" dataValue={average} />
+        <DisplayData label="Positive" dataValue={positivePercentage} />
       </div>
     </>
   );
