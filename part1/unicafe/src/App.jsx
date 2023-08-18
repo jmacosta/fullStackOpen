@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Button from "./Button";
+import PullData from "./PullData";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [feedback, setFeedback] = useState({ good: 0, neutral: 0, bad: 0 });
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Give feedback</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div>
+        <Button
+          onClick={() => setFeedback({ ...feedback, good: feedback.good + 1 })}
+          label="Good"
+        />
+        <Button
+          onClick={() =>
+            setFeedback({ ...feedback, neutral: feedback.neutral + 1 })
+          }
+          label="Neutral"
+        />
+        <Button
+          onClick={() => setFeedback({ ...feedback, bad: feedback.bad + 1 })}
+          label="Bad"
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        <h1>Statistics</h1>
+      </div>
+      <div>
+        <PullData label="Good" counter={feedback.good} />
+        <PullData label="Neutral" counter={feedback.neutral} />
+        <PullData label="Bad" counter={feedback.bad} />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
