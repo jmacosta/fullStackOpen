@@ -1,8 +1,10 @@
 function DisplayData({ label, dataValue }) {
   return (
-    <div>
-      {label} {dataValue}
-    </div>
+    <>
+      <tr>
+        <td>{label}</td> <td>{dataValue}</td>
+      </tr>
+    </>
   );
 }
 
