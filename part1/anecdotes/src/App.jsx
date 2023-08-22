@@ -14,15 +14,25 @@ function App({ anecdotes }) {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(anecdoteVotes);
-
+  const [mostVotes, setMostVotes] = useState(0);
+  const calculateMostVotes = (votes) => {
+    return votes.findIndex(
+      (element) =>
+        element ===
+        votes.reduce((max, currentValue) => {
+          return currentValue > max ? currentValue : max;
+        }, -Infinity)
+    );
+  };
   const onClickNextAnecdotes = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length));
   };
   const onClickVote = (index) => {
     const newAnecdoteVote = [...votes];
     newAnecdoteVote[index] += 1;
-
     setVotes(newAnecdoteVote);
+
+    setMostVotes(calculateMostVotes(votes));
   };
 
   return (
@@ -33,6 +43,11 @@ function App({ anecdotes }) {
       <div style={{ marginTop: "20px" }}>
         <NextAnecdoted onClick={onClickNextAnecdotes}></NextAnecdoted>
         <VoteAnecdote onClick={() => onClickVote(selected)}></VoteAnecdote>
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        {anecdotes[mostVotes]}
+        <> has {votes[mostVotes]} votes</>
       </div>
     </>
   );
