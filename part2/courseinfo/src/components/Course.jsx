@@ -10,6 +10,15 @@ const Course = ({ course }) => {
           return <Subject key={element.id} part={element} />;
         })}
       </div>
+      <div>
+        <h4>
+          Total of{" "}
+          {course.parts.reduce((accumulator, currentvalue) => {
+            return accumulator + currentvalue.exercises;
+          }, 0)}{" "}
+          exercises
+        </h4>
+      </div>
     </>
   );
 };
