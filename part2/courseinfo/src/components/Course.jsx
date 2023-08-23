@@ -4,20 +4,20 @@ import Subject from "./Subject";
 const Course = ({ course }) => {
   return (
     <>
-      <h1>{course.name}</h1>
+      <h2>{course.name}</h2>
       <div>
         {course.parts.map((element) => {
           return <Subject key={element.id} part={element} />;
         })}
       </div>
       <div>
-        <h4>
+        <h3>
           Total of{" "}
           {course.parts.reduce((accumulator, currentvalue) => {
             return accumulator + currentvalue.exercises;
           }, 0)}{" "}
           exercises
-        </h4>
+        </h3>
       </div>
     </>
   );
