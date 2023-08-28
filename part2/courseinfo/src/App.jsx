@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Note from "./components/Note";
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
+
+const App = () => {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("a new note...");
   const [showAll, setShowAll] = useState(true);
   const addNote = (event) => {
@@ -25,6 +27,16 @@ const App = (props) => {
   const notesToShow = showAll
     ? notes
     : notes.filter((note) => note.important === true);
+
+  const hook = () => {
+    console.log("effect");
+    axios.get("http://localhost:3001/notes").then((response) => {
+      console.log("pomise fullfilled");
+      setNotes(response.data);
+    });
+  };
+  useEffect(hook, []);
+  console.log("render", notes.length, "notes");
   return (
     <>
       <h1>Notes</h1>
